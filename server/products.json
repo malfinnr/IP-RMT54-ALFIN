@@ -1,0 +1,245 @@
+[
+  {
+    "name": "Wireless Earbuds",
+    "image": "https://example.com/images/wireless-earbuds.jpg",
+    "description": "High-quality wireless earbuds with noise cancellation.",
+    "fromName": "Alex",
+    "durationOfRelationship": "2 years",
+    "categoryId": 1,
+    "userId": 2
+  },
+  {
+    "name": "Silk Scarf",
+    "image": "https://example.com/images/silk-scarf.jpg",
+    "description": "Elegant silk scarf perfect for any occasion.",
+    "fromName": "Sarah",
+    "durationOfRelationship": "1 year",
+    "categoryId": 2,
+    "userId": 1
+  },
+  {
+    "name": "Blender Set",
+    "image": "https://example.com/images/blender-set.jpg",
+    "description": "Powerful blender set with multiple attachments for easy use.",
+    "fromName": "Tom",
+    "durationOfRelationship": "3 years",
+    "categoryId": 3,
+    "userId": 1
+  },
+  {
+    "name": "Makeup Kit",
+    "image": "https://example.com/images/makeup-kit.jpg",
+    "description": "Complete makeup kit with a variety of colors and tools.",
+    "fromName": "Jessica",
+    "durationOfRelationship": "5 months",
+    "categoryId": 4,
+    "userId": 2
+  },
+  {
+    "name": "Running Shoes",
+    "image": "https://example.com/images/running-shoes.jpg",
+    "description": "Lightweight and durable running shoes for all terrains.",
+    "fromName": "David",
+    "durationOfRelationship": "1 year",
+    "categoryId": 5,
+    "userId": 2
+  },
+  {
+    "name": "Puzzle Game",
+    "image": "https://example.com/images/puzzle-game.jpg",
+    "description": "Challenging puzzle game for family fun.",
+    "fromName": "Alice",
+    "durationOfRelationship": "6 months",
+    "categoryId": 6,
+    "userId": 1
+  },
+  {
+    "name": "Cookbook",
+    "image": "https://example.com/images/cookbook.jpg",
+    "description": "Comprehensive cookbook with recipes from around the world.",
+    "fromName": "Mark",
+    "durationOfRelationship": "2 years",
+    "categoryId": 7,
+    "userId": 2
+  },
+  {
+    "name": "Car Vacuum",
+    "image": "https://example.com/images/car-vacuum.jpg",
+    "description": "Compact car vacuum for a spotless interior.",
+    "fromName": "Paul",
+    "durationOfRelationship": "3 years",
+    "categoryId": 8,
+    "userId": 1
+  },
+  {
+    "name": "Organic Snack Box",
+    "image": "https://example.com/images/organic-snack-box.jpg",
+    "description": "Box of organic snacks for a healthy treat.",
+    "fromName": "Nina",
+    "durationOfRelationship": "4 months",
+    "categoryId": 9,
+    "userId": 1
+  },
+  {
+    "name": "Yoga Mat",
+    "image": "https://example.com/images/yoga-mat.jpg",
+    "description": "Non-slip yoga mat for comfortable workouts.",
+    "fromName": "Emma",
+    "durationOfRelationship": "1 year",
+    "categoryId": 10,
+    "userId": 2
+  },
+  {
+    "name": "Desk Lamp",
+    "image": "https://example.com/images/desk-lamp.jpg",
+    "description": "Adjustable LED desk lamp for better focus.",
+    "fromName": "Sophie",
+    "durationOfRelationship": "8 months",
+    "categoryId": 11,
+    "userId": 2
+  },
+  {
+    "name": "Dog Toy Set",
+    "image": "https://example.com/images/dog-toy-set.jpg",
+    "description": "Set of chewable toys for dogs.",
+    "fromName": "Lucas",
+    "durationOfRelationship": "2 years",
+    "categoryId": 12,
+    "userId": 1
+  },
+  {
+    "name": "Gardening Tools",
+    "image": "https://example.com/images/gardening-tools.jpg",
+    "description": "Complete set of gardening tools for plant care.",
+    "fromName": "Daisy",
+    "durationOfRelationship": "1.5 years",
+    "categoryId": 13,
+    "userId": 2
+  },
+  {
+    "name": "Office Organizer",
+    "image": "https://example.com/images/office-organizer.jpg",
+    "description": "Stylish organizer for a clutter-free workspace.",
+    "fromName": "Ryan",
+    "durationOfRelationship": "1 year",
+    "categoryId": 14,
+    "userId": 1
+  },
+  {
+    "name": "Baby Blanket",
+    "image": "https://example.com/images/baby-blanket.jpg",
+    "description": "Soft baby blanket for extra comfort.",
+    "fromName": "Amy",
+    "durationOfRelationship": "6 months",
+    "categoryId": 15,
+    "userId": 1
+  },
+  {
+    "name": "Smart Watch",
+    "image": "https://example.com/images/smart-watch.jpg",
+    "description": "Feature-packed smartwatch with fitness tracking.",
+    "fromName": "Chris",
+    "durationOfRelationship": "2 years",
+    "categoryId": 1,
+    "userId": 2
+  },
+  {
+    "name": "Leather Jacket",
+    "image": "https://example.com/images/leather-jacket.jpg",
+    "description": "Classic leather jacket for a timeless style.",
+    "fromName": "Ben",
+    "durationOfRelationship": "5 months",
+    "categoryId": 2,
+    "userId": 2
+  },
+  {
+    "name": "Microwave Oven",
+    "image": "https://example.com/images/microwave-oven.jpg",
+    "description": "High-efficiency microwave oven with preset options.",
+    "fromName": "Anna",
+    "durationOfRelationship": "3 years",
+    "categoryId": 3,
+    "userId": 1
+  },
+  {
+    "name": "Face Serum",
+    "image": "https://example.com/images/face-serum.jpg",
+    "description": "Hydrating face serum for glowing skin.",
+    "fromName": "Emily",
+    "durationOfRelationship": "2 months",
+    "categoryId": 4,
+    "userId": 2
+  },
+  {
+    "name": "Dumbbell Set",
+    "image": "https://example.com/images/dumbbell-set.jpg",
+    "description": "Adjustable dumbbell set for home workouts.",
+    "fromName": "Mike",
+    "durationOfRelationship": "1 year",
+    "categoryId": 5,
+    "userId": 1
+  },
+  {
+    "name": "Board Game",
+    "image": "https://example.com/images/board-game.jpg",
+    "description": "Fun board game for family and friends.",
+    "fromName": "Tina",
+    "durationOfRelationship": "8 months",
+    "categoryId": 6,
+    "userId": 1
+  },
+  {
+    "name": "Mystery Novel",
+    "image": "https://example.com/images/mystery-novel.jpg",
+    "description": "Intriguing mystery novel that keeps you guessing.",
+    "fromName": "Grace",
+    "durationOfRelationship": "3 years",
+    "categoryId": 7,
+    "userId": 2
+  },
+  {
+    "name": "Car Phone Holder",
+    "image": "https://example.com/images/car-phone-holder.jpg",
+    "description": "Hands-free phone holder for car use.",
+    "fromName": "James",
+    "durationOfRelationship": "6 months",
+    "categoryId": 8,
+    "userId": 2
+  },
+  {
+    "name": "Fruit Basket",
+    "image": "https://example.com/images/fruit-basket.jpg",
+    "description": "Assorted fruit basket for a healthy snack.",
+    "fromName": "Mia",
+    "durationOfRelationship": "4 months",
+    "categoryId": 9,
+    "userId": 1
+  },
+  {
+    "name": "Massage Roller",
+    "image": "https://example.com/images/massage-roller.jpg",
+    "description": "Relaxing massage roller for muscle relief.",
+    "fromName": "Kate",
+    "durationOfRelationship": "1 year",
+    "categoryId": 10,
+    "userId": 2
+  },
+  {
+    "name": "Office Chair",
+    "image": "https://example.com/images/office-chair.jpg",
+    "description": "Ergonomic office chair for better posture.",
+    "fromName": "Sam",
+    "durationOfRelationship": "8 months",
+    "categoryId": 11,
+    "userId": 1
+  },
+  {
+    "name": "Cat Bed",
+    "image": "https://example.com/images/cat-bed.jpg",
+    "description": "Cozy bed for cats to sleep comfortably.",
+    "fromName": "Bub",
+    "durationOfRelationship": "7 months",
+    "categoryId": 12,
+    "userId": 1
+  }
+]
