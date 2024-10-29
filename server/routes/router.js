@@ -22,7 +22,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.patch(
   "/products/:id/cover-url",
-  guardAdmin,
   upload.single("file"),
   ProductController.updateProductCoverUrlById
 );
