@@ -4,4 +4,4 @@ const CommentController = require("../controllers/CommentController");
 const authentication = require("../middlewares/authentication");
 router.use(authentication);
 
-router.post("/", CommentController.postComment);
+router.post("/:productId", CommentController.postComment);

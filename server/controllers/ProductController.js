@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Product, Category, User } = require("../models");
+const { Product, Category, User, Like, Comment } = require("../models");
 
 class ProductController {
   static async postProduct(req, res, next) {
@@ -7,14 +7,13 @@ class ProductController {
       const {
         name,
         description,
-        image,
         fromName,
         durationOfRelationship,
         categoryId,
       } = req.body;
       const newProduct = await Product.create({
         name,
-        image,
+        image: req.file.secure_url,
         description,
         fromName,
         durationOfRelationship,
@@ -26,7 +25,7 @@ class ProductController {
       next(error);
     }
   }
-  static async getAllProduct(req, res, next) {
+  static async getAllMyProduct(req, res, next) {
     try {
       const allProducts = await Product.findAll({
         // attributes: { exclude: ["password"]},
@@ -35,27 +34,29 @@ class ProductController {
             model: Category,
           },
           {
+            model: Like,
+          },
+          {
+            model: Comment,
+          },
+          {
             model: User,
             attributes: { exclude: "password" },
           },
         ],
+        where: {
+          userId: req.user.id,
+        },
       });
-      res.status(200).json(allProducts);
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async getProductsById(req, res, next) {
-    try {
-      const productsId = req.params.id;
-      const dataProduct = await Product.findByPk(productsId);
-      if (!dataProduct) {
-        throw {
-          name: "NotFound",
-          message: "error not found",
+
+      const productWithLikes = allProducts.map((product) => {
+        return {
+          ...product.toJSON(),
+          totalLikes: product.Likes.length,
         };
-      }
-      res.status(200).json(dataProduct);
+      });
+
+      res.status(200).json(productWithLikes);
     } catch (error) {
       next(error);
     }
@@ -65,7 +66,6 @@ class ProductController {
       const {
         name,
         description,
-        image,
         fromName,
         durationOfRelationship,
         categoryId,
@@ -84,7 +84,7 @@ class ProductController {
         {
           name,
           description,
-          image,
+          image: req.file ? req.file.secure_url : dataProduct.image,
           fromName,
           durationOfRelationship,
           categoryId,
@@ -130,7 +130,7 @@ class ProductController {
       const { filter, sort, search, page } = req.query;
 
       const paramQuerySQL = {
-        limit: 10,
+        limit: 100,
         offset: 0,
         where: {},
         include: [
@@ -138,7 +138,14 @@ class ProductController {
             model: Category,
           },
           {
+            model: Like,
+          },
+          {
+            model: Comment,
+          },
+          {
             model: User,
+            attributes: { exclude: "password" },
           },
         ],
       };
@@ -166,7 +173,15 @@ class ProductController {
         };
       }
       const allProducts = await Product.findAll(paramQuerySQL);
-      res.status(200).json(allProducts);
+
+      const productWithLikes = allProducts.map((product) => {
+        return {
+          ...product.toJSON(),
+          totalLikes: product.Likes.length,
+        };
+      });
+
+      res.status(200).json(productWithLikes);
     } catch (error) {
       next(error);
     }
@@ -174,50 +189,59 @@ class ProductController {
   static async getPublicProductById(req, res, next) {
     try {
       const productsId = req.params.id;
-      const dataProduct = await Product.findByPk(productsId);
+      const dataProduct = await Product.findByPk(productsId, {
+        include: [
+          {
+            model: Category,
+          },
+          {
+            model: Like,
+          },
+          {
+            model: Comment,
+          },
+          {
+            model: User,
+            attributes: { exclude: "password" },
+          },
+        ],
+      });
       if (!dataProduct) {
         throw {
           name: "NotFound",
           message: "error not found",
         };
       }
-      res.status(200).json(dataProduct);
+      res.status(200).json({
+        ...dataProduct.toJSON(),
+        totalLikes: dataProduct.Likes.length,
+      });
     } catch (error) {
       next(error);
     }
   }
-  static async updateProductCoverUrlById(req, res, next) {
-    try {
-      cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-      });
-      const productId = Number(req.params.id);
-      const dataProduct = await Product.findByPk(productId);
-      if (!dataProduct) {
-        throw {
-          name: "NotFound",
-          message: "Product Not Found",
-        };
-      }
-      const mimetype = req.file.mimetype;
-      const base64Image = req.file.buffer.toString("base64");
+  // static async updateProductCoverUrlById(req, res, next) {
+  //   try {
+  //     const productId = Number(req.params.id);
+  //     const dataProduct = await Product.findByPk(productId);
+  //     if (!dataProduct) {
+  //       throw {
+  //         name: "NotFound",
+  //         message: "Product Not Found",
+  //       };
+  //     }
 
-      const result = await cloudinary.uploader.upload(
-        `data:${mimetype};base64,${base64Image}`
-      );
-      await dataProduct.update({
-        imgUrl: result.secure_url,
-      });
-      res.json({
-        message: "Cover url has been updated",
-      });
-    } catch (error) {
-      console.log(error.message);
-      next(error);
-    }
-  }
+  //     await dataProduct.update({
+  //       imgUrl: result.secure_url,
+  //     });
+  //     res.json({
+  //       message: "Cover url has been updated",
+  //     });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     next(error);
+  //   }
+  // }
 }
 
 module.exports = ProductController;

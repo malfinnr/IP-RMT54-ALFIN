@@ -12,13 +12,7 @@ class CategoryController {
   }
   static async getAllCategory(req, res, next) {
     try {
-      const allCategory = await Category.findAll({
-        include: [
-          {
-            model: Product,
-          },
-        ],
-      });
+      const allCategory = await Category.findAll();
       res.status(200).json(allCategory);
     } catch (error) {
       next(error);
@@ -45,7 +39,7 @@ class CategoryController {
           returning: true,
         }
       );
-      console.log(updatedCategory);
+      // console.log(updatedCategory);
       res.status(200).json(updatedCategory[1][0]);
     } catch (error) {
       next(error);

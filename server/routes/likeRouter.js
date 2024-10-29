@@ -4,4 +4,4 @@ const LikeController = require("../controllers/LikeController");
 const authentication = require("../middlewares/authentication");
 router.use(authentication);
 
-router.post("/", LikeController.postLike);
+router.post("/:productId", LikeController.postLike);

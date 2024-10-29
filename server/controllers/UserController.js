@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const { signToken } = require("../helpers/jwt");
+const { comparePassword } = require("../helpers/bcrypt");
 require("dotenv").config();
 
 class UserController {
@@ -61,7 +62,7 @@ class UserController {
           message: "Invalid Email or Password",
         };
       }
-      const validationPassword = bcrypt.compareSync(password, user.password);
+      const validationPassword = comparePassword(password, user.password);
       if (!validationPassword) {
         // res.status(401).json({ message: "Invalid Email or Password" });
         throw {
@@ -71,10 +72,16 @@ class UserController {
       }
       const generateLoad = {
         id: user.id,
-        username: user.username,
+        email: user.email,
+        userName: user.userName,
       };
       const accessToken = signToken(generateLoad);
-      return res.status(200).json({ accessToken });
+      return res.status(200).json({
+        accessToken,
+        email: user.email,
+        fullName: user.fullName,
+        userName: user.userName,
+      });
     } catch (error) {
       next(error);
     }

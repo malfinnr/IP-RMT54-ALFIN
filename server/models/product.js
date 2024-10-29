@@ -6,10 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Category, { foreignKey: "categoryId" });
       Product.belongsTo(models.User, { foreignKey: "userId" });
       Product.hasMany(models.Comment, { foreignKey: "productId" });
-      Product.belongsToMany(models.User, {
-        through: "Likes",
-        foreignKey: "productId",
-      });
+      Product.hasMany(models.Like, { foreignKey: "productId" });
+      // Product.belongsToMany(models.User, {
+      //   through: "Likes",
+      //   foreignKey: "productId",
+      // });
     }
   }
   Product.init(
@@ -24,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       image: DataTypes.STRING,
-      allowNull: false,
       description: {
         type: DataTypes.STRING,
         allowNull: false,

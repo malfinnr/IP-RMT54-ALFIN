@@ -1,14 +1,16 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashPassword } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.hasMany(models.Product, { foreignKey: "userId" });
       User.hasMany(models.Comment, { foreignKey: "userId" });
-      User.belongsToMany(models.Product, {
-        through: "Likes",
-        foreignKey: "userId",
-      });
+      User.hasMany(models.Like, { foreignKey: "userId" });
+      // User.belongsToMany(models.Product, {
+      //   through: "Likes",
+      //   foreignKey: "userId",
+      // });
     }
   }
   User.init(
@@ -68,5 +70,10 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+  User.beforeCreate((user) => {
+    const hash = hashPassword(user.password);
+    user.password = hash;
+  });
+
   return User;
 };

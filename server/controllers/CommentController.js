@@ -3,11 +3,13 @@ const { Comment } = require("../models");
 class CommentController {
   static async postComment(req, res, next) {
     try {
-      const { comment, productId } = req.body;
+      const { comment } = req.body;
+      const { productId } = req.params;
+      const userId = req.user.id;
       const newComment = await Comment.create({
         comment,
         productId,
-        userId: req.user.id,
+        userId,
       });
       res.status(201).json(newComment);
     } catch (error) {
