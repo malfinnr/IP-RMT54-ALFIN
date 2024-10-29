@@ -186,6 +186,38 @@ class ProductController {
       next(error);
     }
   }
+  static async updateProductCoverUrlById(req, res, next) {
+    try {
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+      const productId = Number(req.params.id);
+      const dataProduct = await Product.findByPk(productId);
+      if (!dataProduct) {
+        throw {
+          name: "NotFound",
+          message: "Product Not Found",
+        };
+      }
+      const mimetype = req.file.mimetype;
+      const base64Image = req.file.buffer.toString("base64");
+
+      const result = await cloudinary.uploader.upload(
+        `data:${mimetype};base64,${base64Image}`
+      );
+      await dataProduct.update({
+        imgUrl: result.secure_url,
+      });
+      res.json({
+        message: "Cover url has been updated",
+      });
+    } catch (error) {
+      console.log(error.message);
+      next(error);
+    }
+  }
 }
 
 module.exports = ProductController;
