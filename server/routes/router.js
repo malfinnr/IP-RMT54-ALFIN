@@ -6,7 +6,6 @@ const productRouter = require("./productRouter");
 const categoryRouter = require("./categoryRouter");
 const likeRouter = require("./likeRouter");
 const commentRouter = require("./commentRouter");
-const authentication = require("../middlewares/authentication");
 // const { upload } = require("../middlewares/multer");
 
 router.get("/pub/products", ProductController.getPublicProduct);
@@ -17,7 +16,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", UserController.postAddUser);
-router.use(authentication);
 
 // router.patch(
 //   "/products/:id/cover-url",

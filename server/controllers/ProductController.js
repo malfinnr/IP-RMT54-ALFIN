@@ -127,11 +127,9 @@ class ProductController {
   }
   static async getPublicProduct(req, res, next) {
     try {
-      const { filter, sort, search, page } = req.query;
+      const { categories, sort, search } = req.query;
 
       const paramQuerySQL = {
-        limit: 100,
-        offset: 0,
         where: {},
         include: [
           {
@@ -150,10 +148,6 @@ class ProductController {
         ],
       };
 
-      if (page) {
-        paramQuerySQL.offset = page * paramQuerySQL.limit - paramQuerySQL.limit;
-      }
-
       if (search) {
         paramQuerySQL.where.name = {
           [Op.iLike]: `%${search}%`,
@@ -164,8 +158,8 @@ class ProductController {
         paramQuerySQL.order = [[sort.by, sort.order]];
       }
 
-      if (filter && filter.categories) {
-        const splitCategories = filter.categories.split(",");
+      if (categories) {
+        const splitCategories = categories.split(",");
         paramQuerySQL.where = {
           categoryId: {
             [Op.or]: splitCategories,
