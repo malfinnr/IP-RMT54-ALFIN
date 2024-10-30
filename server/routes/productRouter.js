@@ -16,12 +16,16 @@ router.post(
 );
 router.get("/myproducts", ProductController.getAllMyProduct);
 router.put(
-  "/:id",
-  authorization,
+  "/myproducts/:id",
+  // authorization,
   upload.single("image"),
   uploadImageCloudinary,
   ProductController.putIdProduct
 );
-router.delete("/:id", authorization, ProductController.destroyProducts);
+router.delete(
+  "/myproducts/:id",
+  // authorization,
+  ProductController.destroyProducts
+);
 
 module.exports = router;
