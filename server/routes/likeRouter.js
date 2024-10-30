@@ -5,3 +5,5 @@ const authentication = require("../middlewares/authentication");
 router.use(authentication);
 
 router.post("/:productId", LikeController.postLike);
+
+module.exports = router;

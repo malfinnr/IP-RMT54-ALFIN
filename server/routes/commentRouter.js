@@ -5,3 +5,5 @@ const authentication = require("../middlewares/authentication");
 router.use(authentication);
 
 router.post("/:productId", CommentController.postComment);
+
+module.exports = router;
