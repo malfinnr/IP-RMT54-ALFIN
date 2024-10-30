@@ -11,7 +11,7 @@ async function authorization(req, res, next) {
     });
     return;
   }
-  if (Number(req.user.id) !== Number(dataProduct.authorId)) {
+  if (Number(req.user.id) !== Number(dataProduct.userId)) {
     next({
       name: "Forbidden",
       message: "You are not authorized",

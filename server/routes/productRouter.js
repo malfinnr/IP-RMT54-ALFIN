@@ -17,14 +17,14 @@ router.post(
 router.get("/myproducts", ProductController.getAllMyProduct);
 router.put(
   "/myproducts/:id",
-  // authorization,
+  authorization,
   upload.single("image"),
   uploadImageCloudinary,
   ProductController.putIdProduct
 );
 router.delete(
   "/myproducts/:id",
-  // authorization,
+  authorization,
   ProductController.destroyProducts
 );
 

@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/ProductController");
 const UserController = require("../controllers/UserController");
-const LikeController = require("../controllers/LikeController");
-const CommentController = require("../controllers/CommentController");
 const productRouter = require("./productRouter");
 const categoryRouter = require("./categoryRouter");
+const likeRouter = require("./likeRouter");
+const commentRouter = require("./commentRouter");
 const authentication = require("../middlewares/authentication");
 // const { upload } = require("../middlewares/multer");
 
@@ -27,5 +27,6 @@ router.use(authentication);
 
 router.use("/products", productRouter);
 router.use("/categories", categoryRouter);
-
+router.use("/likes", likeRouter);
+router.use("/comment", commentRouter);
 module.exports = router;
