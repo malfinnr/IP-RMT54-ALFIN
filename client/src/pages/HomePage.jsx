@@ -60,21 +60,15 @@ function HomePage() {
             Toko Barang Mantan
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base text-warm-brown">
-            Temukan barang-barang penuh kenangan dari masa lalu, siap menemukan
-            pemilik baru! Dari hadiah istimewa hingga barang tak terpakai, semua
+            Berisi berbagai hadiah istimewa hingga barang tak terpakai, semua
             ada di sini untuk memberi arti baru. Jelajahi, beri 'like', dan
             tinggalkan komentar — siapa tahu, ada cerita menarik di balik setiap
             barang mantan!
           </p>
           <div className="flex justify-center mt-10">
-            <div className="grid grid-cols-2 gap-4 auto-rows-fr">
-              <button className="bg-soft-olive-green rounded-full text-black-primary font-semibold py-2 px-4 box-dark-brown">
-                Temukan Barang
-              </button>
-              <button className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown">
-                Curahan Hati Sang Mantan
-              </button>
-            </div>
+            <button className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown">
+              Curahan Hati Sang Mantan
+            </button>
           </div>
         </div>
 
