@@ -214,28 +214,6 @@ class ProductController {
       next(error);
     }
   }
-  // static async updateProductCoverUrlById(req, res, next) {
-  //   try {
-  //     const productId = Number(req.params.id);
-  //     const dataProduct = await Product.findByPk(productId);
-  //     if (!dataProduct) {
-  //       throw {
-  //         name: "NotFound",
-  //         message: "Product Not Found",
-  //       };
-  //     }
-
-  //     await dataProduct.update({
-  //       imgUrl: result.secure_url,
-  //     });
-  //     res.json({
-  //       message: "Cover url has been updated",
-  //     });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     next(error);
-  //   }
-  // }
 }
 
 module.exports = ProductController;
