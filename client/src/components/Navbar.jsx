@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import logo from "../assets/Image.png";
 const menuList = [
   { href: "/", name: "Home" },
-  { href: "/add-products", name: "Add Products" },
-  { href: "/chat", name: "Room Chat" },
+  { href: "/add-products", name: "Add Memories" },
+  { href: "/chat", name: "Chat with Bang AI" },
 ];
 
 const Navbar = () => {
@@ -48,7 +48,7 @@ const Navbar = () => {
                 >
                   <img alt="" src={logo} className="h-8 w-auto" />
                   <span className="text-black-primary font-semibold">
-                    Toko Barang Mantan
+                    collEXtion
                   </span>
                 </Link>
               </div>
