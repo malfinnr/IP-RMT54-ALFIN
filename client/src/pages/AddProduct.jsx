@@ -46,7 +46,18 @@ const AddProduct = () => {
         durationOfRelationship: durationOfRelationship,
         categoryId: +categoryId,
       };
-      const response = await apiHelps.post("/products", newProduct, {
+      const formData = new FormData();
+      formData.append("name", newProduct.name);
+      formData.append("image", newProduct.image);
+      formData.append("description", newProduct.description);
+      formData.append("fromName", newProduct.fromName);
+      formData.append(
+        "durationOfRelationship",
+        newProduct.durationOfRelationship
+      );
+      formData.append("categoryId", newProduct.categoryId);
+
+      const response = await apiHelps.post("/products", formData, {
         headers: {
           Authorization: `Bearer ${getAccessToken()}`,
         },
@@ -104,11 +115,17 @@ const AddProduct = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    value={image}
-                    onChange={(event) => setImage(event.target.value)}
+                    multiple={false}
+                    onChange={(event) => {
+                      if (event.target.files) {
+                        const file = event.target.files[0];
+                        setImage(file);
+                      }
+                    }}
                     id="image"
                     name="image"
-                    type="text"
+                    type="file"
+                    accept="image/*"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-warm-brown text-sm"
                   />
                 </div>

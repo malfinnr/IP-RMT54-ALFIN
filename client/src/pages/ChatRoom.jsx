@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import apiHelps from "../helpers/ApiHelps";
+// Make sure to include these imports:
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
@@ -17,27 +21,17 @@ const ChatRoom = () => {
         setMessages([...messages, newMessage]);
         setInputValue("");
 
-        const response = await apiHelps.post("/chat", {
-          question: inputValue,
-        });
-        // const botAnswer = response.data.answer;
-        // const botResponse = {
-        //   text: botAnswer,
-        //   id: messages.length + 1,
-        //   role: 'bot',
-        //   name: 'Bot',
-        // };
-        // setMessages((prevMessages) => [...prevMessages, botResponse]);
-        // Contoh respons bot otomatis
-        setTimeout(() => {
-          const botResponse = {
-            text: "Ini respons dari bot",
-            id: messages.length + 1,
-            role: "bot",
-            name: "Bot",
-          };
-          setMessages((prevMessages) => [...prevMessages, botResponse]);
-        }, 1000);
+        const result = await model.generateContent(inputValue);
+        console.log(result.response.text());
+        const botAnswer = result.response.text();
+
+        const botResponse = {
+          text: botAnswer,
+          id: messages.length + 1,
+          role: "bot",
+          name: "Bot",
+        };
+        setMessages((prevMessages) => [...prevMessages, botResponse]);
       }
     } catch (error) {
       console.log(error);

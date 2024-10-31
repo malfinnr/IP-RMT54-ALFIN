@@ -5,6 +5,7 @@ import RegisterPage from "./pages/RegisterPage";
 import AddProduct from "./pages/AddProduct";
 import ChatRoom from "./pages/ChatRoom";
 import EditProduct from "./pages/EditProduct";
+import DetailProduct from "./pages/DetailProduct";
 
 const router = createBrowserRouter([
   {
@@ -24,12 +25,16 @@ const router = createBrowserRouter([
     element: <AddProduct />,
   },
   {
-    path: "/edit-products",
+    path: "/edit-products/:id",
     element: <EditProduct />,
   },
   {
     path: "/chat",
     element: <ChatRoom />,
+  },
+  {
+    path: "/detail-products/:id",
+    element: <DetailProduct />,
   },
 ]);
 

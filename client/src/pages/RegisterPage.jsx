@@ -2,7 +2,6 @@ import { useState } from "react";
 import logo from "../assets/Image.png";
 import { Link, useNavigate } from "react-router-dom";
 import apiHelps from "../helpers/ApiHelps";
-import { setAccessToken, setUserLogin } from "../helpers/CredentialToken";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -16,17 +15,15 @@ const RegisterPage = () => {
   const onSubmitRegister = async (event) => {
     try {
       event.preventDefault();
-      const response = await apiHelps.post("/login", {
+      const response = await apiHelps.post("/register", {
+        fullName: fullName,
+        userName: userName,
         email: email,
         password: password,
+        gender: gender,
+        dateOfBirth: dateOfBirth,
       });
-      setAccessToken(response.data.accessToken);
-      setUserLogin({
-        email: response.data.email,
-        fullName: response.data.fullName,
-        userName: response.data.userName,
-      });
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }

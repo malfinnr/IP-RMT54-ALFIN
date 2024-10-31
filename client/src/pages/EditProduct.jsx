@@ -16,15 +16,19 @@ const EditProduct = () => {
   const [durationOfRelationship, setDurationOfRelationship] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [productImage, setProductImage] = useState("");
 
+  console.log("useEffect", params.id);
   useEffect(() => {
     const getDataProductDetail = async () => {
+      console.log("getDataProduct");
       try {
-        const response = await apiHelps.get("/products", {
+        const response = await apiHelps.get(`/pub/products/${params.id}`, {
           headers: {
             Authorization: `Bearer ${getAccessToken()}`,
           },
         });
+        console.log(response);
         const productDetail = response.data;
         setName(productDetail.name);
         setImage(productDetail.image);
@@ -32,11 +36,12 @@ const EditProduct = () => {
         setFromName(productDetail.fromName);
         setDurationOfRelationship(productDetail.durationOfRelationship);
         setCategoryId(productDetail.categoryId);
+        setProductImage(productDetail.image);
       } catch (error) {
         console.log(error);
       }
     };
-    getDataProductDetail;
+    getDataProductDetail();
   }, [params.id]);
 
   useEffect(() => {
@@ -69,13 +74,48 @@ const EditProduct = () => {
         durationOfRelationship: durationOfRelationship,
         categoryId: +categoryId,
       };
-      const response = await apiHelps.put("/products", newProduct, {
-        headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
-        },
-      });
+      const formData = new FormData();
+      formData.append("name", newProduct.name);
+      if (newProduct.image) {
+        formData.append("image", newProduct.image);
+      }
+      formData.append("description", newProduct.description);
+      formData.append("fromName", newProduct.fromName);
+      formData.append(
+        "durationOfRelationship",
+        newProduct.durationOfRelationship
+      );
+      formData.append("categoryId", newProduct.categoryId);
+      const response = await apiHelps.put(
+        `/products/myproducts/${params.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        }
+      );
       navigate("/");
       setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      const response = await apiHelps.delete(
+        `/products/myproducts/${params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        }
+      );
+      setLoading(false);
+      navigate("/");
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -127,13 +167,22 @@ const EditProduct = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    value={image}
-                    onChange={(event) => setImage(event.target.value)}
+                    multiple={false}
+                    onChange={(event) => {
+                      if (event.target.files) {
+                        const file = event.target.files[0];
+                        setImage(file);
+                      }
+                    }}
                     id="image"
                     name="image"
-                    type="text"
+                    type="file"
+                    accept="image/*"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-warm-brown text-sm"
                   />
+                  <p className="text-xs text-gray-500 break-all">
+                    {productImage}
+                  </p>
                 </div>
               </div>
               <div>
@@ -147,7 +196,7 @@ const EditProduct = () => {
                   <input
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
-                    id="descriptioj"
+                    id="description"
                     name="description"
                     type="text"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-warm-brown text-sm"
@@ -221,9 +270,17 @@ const EditProduct = () => {
                 <button
                   disabled={loading}
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-dark-brown px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
+                  className="disabled:opacity-50 flex w-full justify-center rounded-md bg-yellow-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
                 >
-                  {loading ? "loading..." : "Edit Memories"}
+                  Edit Memories
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={loading}
+                  type="button"
+                  className="disabled:opacity-50 mt-3 flex w-full justify-center rounded-md bg-red-800 px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
+                >
+                  Delete Memories
                 </button>
               </div>
             </form>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import apiHelps from "../helpers/ApiHelps";
 import CardProduct from "../components/CardProduct";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [dataCategories, setDataCategories] = useState([]);
@@ -66,9 +67,12 @@ function HomePage() {
             bersama mantan!
           </p>
           <div className="flex justify-center mt-10">
-            <button className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown">
-              Curahan Hati Sang Mantan
-            </button>
+            <Link
+              to={"/chat"}
+              className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown"
+            >
+              Curhat Bang AI
+            </Link>
           </div>
         </div>
 

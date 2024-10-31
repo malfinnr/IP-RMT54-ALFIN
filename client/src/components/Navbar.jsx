@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/Image.png";
+import { getUserLogin, removeCredential } from "../helpers/CredentialToken";
+
 const menuList = [
   { href: "/", name: "Home" },
   { href: "/add-products", name: "Add Memories" },
-  { href: "/chat", name: "Chat with Bang AI" },
 ];
 
 const Navbar = () => {
@@ -27,11 +28,36 @@ const Navbar = () => {
     );
   };
 
+  const handleLogOut = () => {
+    removeCredential();
+    window.location.reload();
+  };
+
   const renderAuthMenuList = () => {
+    const userData = getUserLogin();
+    if (userData) {
+      return (
+        <div className="flex item-center gap-2 h-full">
+          <p className="text-sm font-semibold text-dark-brown">
+            {userData.userName}
+          </p>
+          <button
+            onClick={handleLogOut}
+            className="active:translate-y-px box-dark-brown px-4 rounded-full bg-red-800 h-full flex items-center"
+          >
+            <span className="text-white font-semibold">Sign Out</span>
+          </button>
+        </div>
+      );
+    }
+
     return (
-      <button className="active:translate-y-px box-dark-brown px-4 rounded-full bg-soft-coral h-full flex items-center">
+      <Link
+        to={"/login"}
+        className="active:translate-y-px box-dark-brown px-4 rounded-full bg-soft-coral h-full flex items-center"
+      >
         <span className="text-black-primary font-semibold">Sign In</span>
-      </button>
+      </Link>
     );
   };
 
