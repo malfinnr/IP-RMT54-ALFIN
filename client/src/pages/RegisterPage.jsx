@@ -95,7 +95,6 @@ const RegisterPage = () => {
                 />
               </div>
             </div>
-
             <div>
               <label
                 htmlFor="password"
@@ -160,7 +159,6 @@ const RegisterPage = () => {
             </div>
           </form>
         </div>
-
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           Have an account?{" "}
           <Link
