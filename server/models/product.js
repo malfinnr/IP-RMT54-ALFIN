@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Product.belongsTo(models.Category, { foreignKey: "categoryId" });
       Product.belongsTo(models.User, { foreignKey: "userId" });
-      Product.hasMany(models.Comment, { foreignKey: "productId" });
+      Product.hasMany(models.Comment, {
+        foreignKey: "productId",
+      });
       Product.hasMany(models.Like, { foreignKey: "productId" });
       // Product.belongsToMany(models.User, {
       //   through: "Likes",
