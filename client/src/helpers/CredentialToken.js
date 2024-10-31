@@ -19,3 +19,8 @@ export const getUserLogin = () => {
     return null;
   }
 };
+
+export const removeCredential = () => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("user_data");
+};

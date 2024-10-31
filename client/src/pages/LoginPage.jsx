@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/Image.png";
 import { Link, useNavigate } from "react-router-dom";
 import apiHelps from "../helpers/ApiHelps";
 import { setAccessToken, setUserLogin } from "../helpers/CredentialToken";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -24,9 +25,46 @@ const LoginPage = () => {
       });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error?.response?.data?.message || "Try Again Buddy",
+        icon: "error",
+      });
     }
   };
+
+  useEffect(() => {
+    // Initialize the Google Sign-In button
+    google.accounts.id.initialize({
+      // to load the env in Vite project
+      // please navigate to this doc -> https://vitejs.dev/guide/env-and-mode
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      // After the process is complete, the callback function will be called
+      callback: async (response) => {
+        // console.log("Encoded JWT ID token: " + response.credential)
+        console.log(response);
+
+        // Here is the logic to send the credential to the server
+        // You can use axios or fetch to send the credential to the server
+        // const { data } = await axios.post('http://localhost:3000/auth/google', {
+        //   googleToken: response.credential,
+        // });
+        // localStorage.setItem('access_token', data.access_token);
+
+        // navigate to the home page or do magic stuff
+      },
+    });
+
+    // Render the Google Sign-In button
+    google.accounts.id.renderButton(
+      // The ID of the HTML element where the button will be rendered
+      document.getElementById("buttonDiv"),
+      // Customize the button attributes
+      { theme: "outline", size: "large" }
+    );
+    // Display the One Tap dialog; comment out to remove the dialog
+    google.accounts.id.prompt();
+  }, []);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 px-8">
@@ -107,7 +145,8 @@ const LoginPage = () => {
             </div>
 
             <div className="mt-6">
-              <div className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+              <div id="buttonDiv"></div>
+              {/* <div className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
                   <path
                     d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z"
@@ -127,7 +166,7 @@ const LoginPage = () => {
                   />
                 </svg>
                 <span className="text-sm/6 font-semibold">Google</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

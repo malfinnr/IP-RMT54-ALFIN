@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import apiHelps from "../helpers/ApiHelps";
 import CardProduct from "../components/CardProduct";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [dataCategories, setDataCategories] = useState([]);
@@ -60,15 +61,18 @@ function HomePage() {
             Toko Barang Mantan
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base text-warm-brown">
-            Berisi berbagai hadiah istimewa hingga barang tak terpakai, semua
-            ada di sini untuk memberi arti baru. Jelajahi, beri 'like', dan
-            tinggalkan komentar — siapa tahu, ada cerita menarik di balik setiap
-            barang mantan!
+            Berisi berbagai kenangan istimewa bersama sang mantan, semua ada di
+            sini untuk memberi arti baru. Jelajahi, beri 'like', dan tinggalkan
+            komentar — siapa tahu, ada cerita menarik di balik setiap barang
+            bersama mantan!
           </p>
           <div className="flex justify-center mt-10">
-            <button className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown">
-              Curahan Hati Sang Mantan
-            </button>
+            <Link
+              to={"/chat"}
+              className="bg-vintage-pink text-black-primary font-semibold rounded-full py-2 px-4 box-dark-brown"
+            >
+              Curhat Bang AI
+            </Link>
           </div>
         </div>
 
