@@ -54,7 +54,6 @@ function HomePage() {
   return (
     <div className="relative flex flex-col">
       <Navbar />
-
       <div className="mt-[60px] max-w-7xl mx-auto px-4 w-full">
         <div className="py-24 text-center">
           <h1 className="text-4xl font-bold tracking-tight text-black-primary">
@@ -75,7 +74,6 @@ function HomePage() {
             </Link>
           </div>
         </div>
-
         <div className="w-full border-y border-dark-brown py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -95,7 +93,6 @@ function HomePage() {
                 })}
               </select>
             </div>
-
             <div className="flex max-w-md">
               <input
                 value={search}
@@ -109,7 +106,6 @@ function HomePage() {
             </div>
           </div>
         </div>
-
         <div className="grid grid-cols-4 gap-4 py-20">
           {dataProducts.map((product) => {
             return (
